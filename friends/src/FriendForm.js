@@ -1,41 +1,50 @@
 import React from 'react';
 
-class FriendForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name:'',
-            age:'',
-            email:''
-        };
+
+function FriendForm (props) {
+    function handleSubmit(e) {
+        e.preventDefault();
+        if (props.isUpdating) {
+            props.updateFriend();
+        } else {
+            props.addFriend();
+        }
     }
-    render() {
-        return (
-            <div>
-                <form>
-                    <input 
-                        type='text'
-                        name='name'
-                        value={this.state.name}
-                        placeholder='Name'
-                    />
-                     <input 
-                        type='text'
-                        name='age'
-                        value={this.state.age}
-                        placeholder='Age'
-                    />
-                     <input 
-                        type='text'
-                        name='email'
-                        value={this.state.email}
-                        placeholder='E-Mail'
-                    />
-                    <button>Submit</button>
-                </form>
-            </div>
-        ) 
-    }
+    return (
+    <div className='form-container'>
+        <h2>Add New Friend</h2>
+        <form >
+
+            <input onSubmit={handleSubmit}
+                type="text"
+                name="name"
+                
+                value={props.name}
+                placeholder="Name"
+                onChange={props.handleChanges}
+            />
+            <div className='baseline' />
+            <input 
+                type="text"
+                name="age"
+                value={props.age}
+                placeholder="Age"
+                onChange={props.handleChanges}
+            />
+            <div className='baseline' />
+            <input 
+                type="text"
+                name="email"
+                value={props.email}
+                placeholder="E-Mail"
+                onChange={props.handleChanges}
+            />
+            <div className='baseline' />
+
+            <button type='submit'>Add New Friend</button>
+        </form>
+    </div>
+    )
 }
 
 
