@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import axios from 'axios';
+
+import Friends from './Friends';
+import FriendForm from './FriendForm';
 import './App.css';
 
 class App extends Component {
@@ -22,14 +26,19 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-      <h1>Friends</h1>
-      {this.state.friends.map(friend => (
-        <div key={friend.id}>
-          <h2>{friend.name}</h2>
-          <h3>{friend.age}</h3>
-          <h3>{friend.email}</h3>
-        </div>
-      ))}
+      <Route 
+        exact path='/'
+        render={props => (
+          <Friends {...props} friends={this.state.friends} />
+        )}
+      />
+      <Route 
+        path='/add-friend'
+        render={props => (
+          <FriendForm {...props} refresh={this.updateState} />
+        )}
+      />
+      
       </div>
     );
   }
